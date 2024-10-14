@@ -10,6 +10,9 @@ namespace Zadachi
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Привет!");
+            Console.ReadKey();
         }
+       
     }
 }
