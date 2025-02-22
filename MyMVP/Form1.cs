@@ -39,5 +39,10 @@ namespace MyMVP
 
             presenter_.FiltrName(filterText);
         }
+
+        private void DataTable_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
