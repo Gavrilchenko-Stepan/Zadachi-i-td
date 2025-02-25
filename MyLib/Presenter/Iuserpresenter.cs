@@ -12,12 +12,14 @@ namespace MyLib.Presenter
     {
         Iusersmodel model_;
         Iusersview view_;
+        iUserCard card_;
 
 
-        public userpresenter(Iusersmodel m, Iusersview v) 
+        public userpresenter(Iusersmodel m, Iusersview v, iUserCard c) 
         { 
             model_ = m;
             view_ = v;
+            card_ = c;
             model_.DataChanged += Model__DataChanged;
             model_.LoadInForUsers();
         }
@@ -30,6 +32,12 @@ namespace MyLib.Presenter
         public void FiltrName(string name)
         {
             model_.FiltrByName(name);
+        }
+
+        public void SelectUser(int row)
+        {
+            User u = model_.GetUsers()[row];
+            card_.Show(u);
         }
     }
 }

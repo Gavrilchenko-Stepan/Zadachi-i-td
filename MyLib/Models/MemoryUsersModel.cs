@@ -23,9 +23,9 @@ namespace MyLib.Models
         public void LoadInForUsers()
         {
             
-            users_.Add(new User{login = "Ad123", password = "1234", username = "Иванов Иван Иванович", dateBirth = new DateTime(2002,08,15) });
-            users_.Add(new User { login = "Dfg11", password = "5678", username = "Петросян Дмитрий Петрович", dateBirth = new DateTime(1999, 05, 10) });
-            users_.Add(new User { login = "Gal531", password = "9102", username = "Галузин Пётр Алексеевич", dateBirth = new DateTime(2005, 01, 04) });
+            users_.Add(new User{login = "Ad123", password = "1234", username = "Иванов Иван Иванович", dateBirth = new DateTime(2002,08,15), email = "ivanovI@gmail.com" });
+            users_.Add(new User { login = "Dfg11", password = "5678", username = "Петросян Дмитрий Петрович", dateBirth = new DateTime(1999, 05, 10), email = "petro123@gmail.com" });
+            users_.Add(new User { login = "Gal531", password = "9102", username = "Галузин Пётр Алексеевич", dateBirth = new DateTime(2005, 01, 04), email = "galuz34@yandex.ru" });
             filteredUsers = new List<User>(users_);
             DataChanged.Invoke();
         }

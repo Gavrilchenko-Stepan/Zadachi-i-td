@@ -21,10 +21,17 @@ namespace UserCard
 
         public void Show(User u)
         {
-            throw new NotImplementedException();
+            textName.Text = u.login;
+            textEmail.Text = u.email;
+
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textName_TextChanged(object sender, EventArgs e)
         {
 
         }

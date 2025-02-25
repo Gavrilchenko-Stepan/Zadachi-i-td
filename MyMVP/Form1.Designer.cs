@@ -31,7 +31,7 @@
             this.UserTable = new System.Windows.Forms.DataGridView();
             this.buttonFilter = new System.Windows.Forms.Button();
             this.TextBoxFilter = new System.Windows.Forms.TextBox();
-            this.userControl11 = new UserCard.UserControl1();
+            this.UserCard = new UserCard.UserControl1();
             ((System.ComponentModel.ISupportInitialize)(this.UserTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,12 +40,14 @@
             this.UserTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.UserTable.Location = new System.Drawing.Point(61, 32);
             this.UserTable.Name = "UserTable";
+            this.UserTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.UserTable.Size = new System.Drawing.Size(658, 150);
             this.UserTable.TabIndex = 0;
+            this.UserTable.SelectionChanged += new System.EventHandler(this.UserTable_SelectionChanged);
             // 
             // buttonFilter
             // 
-            this.buttonFilter.Location = new System.Drawing.Point(400, 202);
+            this.buttonFilter.Location = new System.Drawing.Point(147, 231);
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Size = new System.Drawing.Size(75, 23);
             this.buttonFilter.TabIndex = 1;
@@ -55,24 +57,24 @@
             // 
             // TextBoxFilter
             // 
-            this.TextBoxFilter.Location = new System.Drawing.Point(143, 204);
+            this.TextBoxFilter.Location = new System.Drawing.Point(61, 205);
             this.TextBoxFilter.Name = "TextBoxFilter";
             this.TextBoxFilter.Size = new System.Drawing.Size(251, 20);
             this.TextBoxFilter.TabIndex = 2;
             // 
-            // userControl11
+            // UserCard
             // 
-            this.userControl11.Location = new System.Drawing.Point(264, 251);
-            this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(391, 174);
-            this.userControl11.TabIndex = 3;
+            this.UserCard.Location = new System.Drawing.Point(334, 188);
+            this.UserCard.Name = "UserCard";
+            this.UserCard.Size = new System.Drawing.Size(439, 256);
+            this.UserCard.TabIndex = 3;
             // 
             // DataTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.userControl11);
+            this.Controls.Add(this.UserCard);
             this.Controls.Add(this.TextBoxFilter);
             this.Controls.Add(this.buttonFilter);
             this.Controls.Add(this.UserTable);
@@ -90,7 +92,7 @@
         private System.Windows.Forms.DataGridView UserTable;
         private System.Windows.Forms.Button buttonFilter;
         private System.Windows.Forms.TextBox TextBoxFilter;
-        private UserCard.UserControl1 userControl11;
+        private UserCard.UserControl1 UserCard;
     }
 }
 

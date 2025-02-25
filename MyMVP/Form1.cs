@@ -21,7 +21,8 @@ namespace MyMVP
         public DataTable()
         {
             InitializeComponent();
-            presenter_ = new userpresenter(new MemoryUsersModel(), this);
+            presenter_ = new userpresenter(new MemoryUsersModel(), this, UserCard);
+
         }
 
         public void ShowUsers(List<User> users)
@@ -43,6 +44,12 @@ namespace MyMVP
         private void DataTable_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void UserTable_SelectionChanged(object sender, EventArgs e)
+        {
+            int row = UserTable.CurrentCell.RowIndex;
+            presenter_.SelectUser(row);
         }
     }
 }
