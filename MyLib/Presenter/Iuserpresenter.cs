@@ -22,6 +22,13 @@ namespace MyLib.Presenter
             card_ = c;
             model_.DataChanged += Model__DataChanged;
             model_.LoadInForUsers();
+
+            card_.DataUpdate += Card__DataUpdate;
+        }
+
+        private void Card__DataUpdate(User obj)
+        {
+            
         }
 
         private void Model__DataChanged()

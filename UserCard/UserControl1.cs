@@ -19,11 +19,14 @@ namespace UserCard
             InitializeComponent();
         }
 
+        public event Action<User> DataUpdate;
+
         public void Show(User u)
         {
             textName.Text = u.login;
             textEmail.Text = u.email;
 
+            pictureBox1.Image = ;
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
@@ -32,6 +35,11 @@ namespace UserCard
         }
 
         private void textName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
         {
 
         }

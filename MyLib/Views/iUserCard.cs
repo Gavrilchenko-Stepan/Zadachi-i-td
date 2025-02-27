@@ -9,5 +9,6 @@ namespace MyLib.Views
     public interface iUserCard
     {
         void Show(User u);
+        event Action<User> DataUpdate;
     }
 }

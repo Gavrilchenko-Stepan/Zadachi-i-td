@@ -68,6 +68,7 @@
             this.UserCard.Name = "UserCard";
             this.UserCard.Size = new System.Drawing.Size(439, 256);
             this.UserCard.TabIndex = 3;
+            this.UserCard.Load += new System.EventHandler(this.UserCard_Load);
             // 
             // DataTable
             // 

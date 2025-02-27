@@ -25,6 +25,11 @@ namespace MyMVP
 
         }
 
+        public int GetIndexSelected()
+        {
+            return UserTable.CurrentCell.RowIndex;
+        }
+
         public void ShowUsers(List<User> users)
         {
             MessageBox.Show($"{users.Count}");
@@ -48,8 +53,12 @@ namespace MyMVP
 
         private void UserTable_SelectionChanged(object sender, EventArgs e)
         {
-            int row = UserTable.CurrentCell.RowIndex;
-            presenter_.SelectUser(row);
+            presenter_.SelectUser(GetIndexSelected());
+        }
+
+        private void UserCard_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
