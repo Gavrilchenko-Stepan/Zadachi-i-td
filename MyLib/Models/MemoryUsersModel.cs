@@ -45,6 +45,24 @@ namespace MyLib.Models
             filteredUsers = newUsers;
             DataChanged.Invoke();
         }
-        
+
+        private void ChangeUser(User obj)
+        {
+            for(int intex = 0; intex < users_.Count; ++intex)
+            {
+                User user = users_.ElementAt(intex);
+                if(obj.login == user.login)
+                {
+                    users_[intex].username = obj.username;
+                    users_[intex].email = obj.email;
+                }
+            }
+            DataChanged.Invoke();
+        }
+
+        void Iusersmodel.ChangeUser(User obj)
+        {
+            ChangeUser(obj);
+        }
     }
 }

@@ -10,11 +10,13 @@ using System.IO;
 using System.Windows.Forms;
 using MyLib.Views;
 using MyLib;
+using System.Diagnostics.Eventing.Reader;
 
 namespace UserCard
 {
     public partial class UserControl1: UserControl, iUserCard
     {
+        private string login_;
         public UserControl1()
         {
             InitializeComponent();
@@ -24,8 +26,9 @@ namespace UserCard
 
         public void Show(User u)
         {
-            textName.Text = u.login;
+            textName.Text = u.username;
             textEmail.Text = u.email;
+            login_ = u.login;
 
             pictureBox1.Image = Image.FromFile(u.avatarPath);
         }
@@ -42,7 +45,11 @@ namespace UserCard
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-
+            User u = new User();
+            u.username = textName.Text;
+            u.email = textEmail.Text;
+            u.login = login_;
+            DataUpdate.Invoke(u);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace MyLib.Presenter
 
         private void Card__DataUpdate(User obj)
         {
-            
+            model_.ChangeUser(obj);
         }
 
         private void Model__DataChanged()
