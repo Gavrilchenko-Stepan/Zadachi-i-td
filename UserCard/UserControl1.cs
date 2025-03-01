@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using MyLib.Views;
 using MyLib;
@@ -26,7 +27,7 @@ namespace UserCard
             textName.Text = u.login;
             textEmail.Text = u.email;
 
-            pictureBox1.Image = ;
+            pictureBox1.Image = Image.FromFile(u.avatarPath);
         }
 
         private void UserControl1_Load(object sender, EventArgs e)

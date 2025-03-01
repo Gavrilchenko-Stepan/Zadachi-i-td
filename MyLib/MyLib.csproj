@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\MemoryUsersModel.cs" />
-    <Compile Include="Presenter\Iuserpresenter.cs" />
+    <Compile Include="Presenter\userpresenter.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Models\Iusersmodel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
