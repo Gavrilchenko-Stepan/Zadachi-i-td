@@ -53,12 +53,42 @@ namespace MyMVP
 
         private void UserTable_SelectionChanged(object sender, EventArgs e)
         {
-            presenter_.SelectUser(GetIndexSelected());
+            if (UserTable.CurrentCell != null)
+            {
+                presenter_.SelectUser(GetIndexSelected());
+            }
         }
 
         private void UserCard_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            User newUser = new User
+            {
+                login = "NewUser",
+                password = "1234",
+                username = "Новый пользователь",
+                dateBirth = DateTime.Now,
+                email = "new@example.com",
+                avatarPath = "C:\\Image\\1.jpg"
+            };
+
+            presenter_.AddNewUser(newUser);
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            if (UserTable.CurrentCell != null)
+            {
+                presenter_.RemoveSelectedUser();
+            }
+            else
+            {
+                MessageBox.Show("Выберите пользователя для удаления");
+            }
         }
     }
 }

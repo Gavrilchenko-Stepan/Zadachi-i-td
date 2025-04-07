@@ -17,5 +17,8 @@ namespace MyLib.Models
         void FiltrByName(string name);
 
         void ChangeUser(User obj);
+
+        void AddUser(User newUser);
+        void RemoveUser(string login);
     }
 }

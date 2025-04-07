@@ -12,7 +12,7 @@ namespace MyLib
         public string password { get; set; }
         public string username { get; set; }
         public DateTime dateBirth { get; set; }
-        public string email;
+        public string email { get; set; }
         public string avatarPath;
 
     }

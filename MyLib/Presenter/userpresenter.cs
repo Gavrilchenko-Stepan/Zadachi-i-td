@@ -43,8 +43,27 @@ namespace MyLib.Presenter
 
         public void SelectUser(int row)
         {
-            User u = model_.GetUsers()[row];
-            card_.Show(u);
+            var users = model_.GetUsers();
+            if (row >= 0 && row < users.Count)
+            {
+                User u = users[row];
+                card_.Show(u);
+            }
+        }
+
+        public void AddNewUser(User newUser)
+        {
+            model_.AddUser(newUser);
+        }
+
+        public void RemoveSelectedUser()
+        {
+            int index = view_.GetIndexSelected();
+            if (index >= 0 && index < model_.GetUsers().Count)
+            {
+                string login = model_.GetUsers()[index].login;
+                model_.RemoveUser(login);
+            }
         }
     }
 }
