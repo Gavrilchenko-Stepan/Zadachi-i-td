@@ -33,6 +33,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonSelectImage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -73,6 +74,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonSelectImage);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.buttonEdit);
             this.panel1.Controls.Add(this.textName);
@@ -81,6 +83,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(433, 249);
             this.panel1.TabIndex = 4;
+            // 
+            // buttonSelectImage
+            // 
+            this.buttonSelectImage.Location = new System.Drawing.Point(38, 173);
+            this.buttonSelectImage.Name = "buttonSelectImage";
+            this.buttonSelectImage.Size = new System.Drawing.Size(75, 23);
+            this.buttonSelectImage.TabIndex = 4;
+            this.buttonSelectImage.Text = "Обзор...";
+            this.buttonSelectImage.UseVisualStyleBackColor = true;
+            this.buttonSelectImage.Click += new System.EventHandler(this.buttonSelectImage_Click);
             // 
             // UserControl1
             // 
@@ -104,5 +116,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button buttonSelectImage;
     }
 }
