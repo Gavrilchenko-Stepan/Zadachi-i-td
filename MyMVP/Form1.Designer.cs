@@ -35,24 +35,27 @@
             this.buttonRemove = new System.Windows.Forms.Button();
             this.UserCard = new UserCard.UserControl1();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.UserTable)).BeginInit();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // UserTable
             // 
-            this.UserTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.UserTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.UserTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.UserTable.Location = new System.Drawing.Point(12, 3);
+            this.UserTable.Dock = System.Windows.Forms.DockStyle.Top;
+            this.UserTable.Location = new System.Drawing.Point(0, 0);
             this.UserTable.Name = "UserTable";
             this.UserTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.UserTable.Size = new System.Drawing.Size(838, 150);
+            this.UserTable.Size = new System.Drawing.Size(895, 150);
             this.UserTable.TabIndex = 0;
             this.UserTable.SelectionChanged += new System.EventHandler(this.UserTable_SelectionChanged);
             // 
             // buttonFilter
             // 
-            this.buttonFilter.Location = new System.Drawing.Point(279, 170);
+            this.buttonFilter.Location = new System.Drawing.Point(120, 72);
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Size = new System.Drawing.Size(75, 23);
             this.buttonFilter.TabIndex = 1;
@@ -62,14 +65,14 @@
             // 
             // TextBoxFilter
             // 
-            this.TextBoxFilter.Location = new System.Drawing.Point(12, 170);
+            this.TextBoxFilter.Location = new System.Drawing.Point(33, 32);
             this.TextBoxFilter.Name = "TextBoxFilter";
             this.TextBoxFilter.Size = new System.Drawing.Size(251, 20);
             this.TextBoxFilter.TabIndex = 2;
             // 
             // buttonAdd
             // 
-            this.buttonAdd.Location = new System.Drawing.Point(12, 301);
+            this.buttonAdd.Location = new System.Drawing.Point(33, 168);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonAdd.TabIndex = 4;
@@ -79,7 +82,7 @@
             // 
             // buttonRemove
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(188, 301);
+            this.buttonRemove.Location = new System.Drawing.Point(224, 168);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(75, 23);
             this.buttonRemove.TabIndex = 5;
@@ -89,25 +92,40 @@
             // 
             // UserCard
             // 
-            this.UserCard.Location = new System.Drawing.Point(403, 169);
+            this.UserCard.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UserCard.AutoSize = true;
+            this.UserCard.Location = new System.Drawing.Point(335, 156);
             this.UserCard.Name = "UserCard";
-            this.UserCard.Size = new System.Drawing.Size(447, 242);
+            this.UserCard.Size = new System.Drawing.Size(548, 280);
             this.UserCard.TabIndex = 3;
             this.UserCard.Load += new System.EventHandler(this.UserCard_Load);
             // 
             // panel1
             // 
             this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.UserTable);
             this.panel1.Controls.Add(this.UserCard);
-            this.panel1.Controls.Add(this.buttonRemove);
-            this.panel1.Controls.Add(this.TextBoxFilter);
-            this.panel1.Controls.Add(this.buttonAdd);
-            this.panel1.Controls.Add(this.buttonFilter);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(872, 424);
+            this.panel1.Size = new System.Drawing.Size(895, 448);
             this.panel1.TabIndex = 6;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.TextBoxFilter);
+            this.groupBox1.Controls.Add(this.buttonFilter);
+            this.groupBox1.Controls.Add(this.buttonAdd);
+            this.groupBox1.Controls.Add(this.buttonRemove);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox1.Location = new System.Drawing.Point(0, 150);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(329, 298);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Фильтр";
             // 
             // DataTable
             // 
@@ -121,6 +139,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.UserTable)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,6 +155,7 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
