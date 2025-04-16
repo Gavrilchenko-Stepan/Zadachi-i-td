@@ -1,0 +1,205 @@
+Вот полная реализация системы аутентификации с вашей моделью пользователя, включая регистрацию, вход и выход:
+
+1. Обновленная модель User
+csharp
+Copy
+using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+
+public class User : IdentityUser<int>
+{
+    [Required(ErrorMessage = "Имя обязательно для заполнения.")]
+    [StringLength(50, ErrorMessage = "Имя не должно превышать 50 символов.")]
+    public required string Name { get; set; }
+
+    [Required(ErrorMessage = "Фамилия обязательна для заполнения.")]
+    [StringLength(50, ErrorMessage = "Фамилия не должна превышать 50 символов.")]
+    public required string Surname { get; set; }
+
+    [StringLength(50, ErrorMessage = "Отчество не должно превышать 50 символов.")]
+    public string? Patronymic { get; set; }
+
+    [Required(ErrorMessage = "Номер телефона обязателен для заполнения.")]
+    [Phone(ErrorMessage = "Некорректный формат номера телефона.")]
+    public override string PhoneNumber { get; set; }
+
+    public List<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
+}
+2. DTO модели (DTOs/Auth/)
+RegisterDTO.cs
+csharp
+Copy
+using System.ComponentModel.DataAnnotations;
+
+public class RegisterDTO
+{
+    [Required(ErrorMessage = "Имя обязательно для заполнения.")]
+    [StringLength(50, ErrorMessage = "Имя не должно превышать 50 символов.")]
+    public required string Name { get; set; }
+
+    [Required(ErrorMessage = "Фамилия обязательна для заполнения.")]
+    [StringLength(50, ErrorMessage = "Фамилия не должна превышать 50 символов.")]
+    public required string Surname { get; set; }
+
+    [StringLength(50, ErrorMessage = "Отчество не должно превышать 50 символов.")]
+    public string? Patronymic { get; set; }
+
+    [Required(ErrorMessage = "Электронная почта обязательна для заполнения.")]
+    [EmailAddress(ErrorMessage = "Некорректный формат электронной почты.")]
+    public required string Email { get; set; }
+
+    [Required(ErrorMessage = "Номер телефона обязателен для заполнения.")]
+    [Phone(ErrorMessage = "Некорректный формат номера телефона.")]
+    public required string PhoneNumber { get; set; }
+
+    [Required(ErrorMessage = "Пароль обязателен для заполнения.")]
+    [StringLength(100, MinimumLength = 6, ErrorMessage = "Пароль должен быть от 6 до 100 символов.")]
+    [DataType(DataType.Password)]
+    public required string Password { get; set; }
+
+    [Required(ErrorMessage = "Подтверждение пароля обязательно.")]
+    [Compare("Password", ErrorMessage = "Пароли не совпадают.")]
+    [DataType(DataType.Password)]
+    public required string ConfirmPassword { get; set; }
+}
+LoginDTO.cs
+csharp
+Copy
+using System.ComponentModel.DataAnnotations;
+
+public class LoginDTO
+{
+    [Required(ErrorMessage = "Электронная почта обязательна для заполнения.")]
+    [EmailAddress(ErrorMessage = "Некорректный формат электронной почты.")]
+    public required string Email { get; set; }
+
+    [Required(ErrorMessage = "Пароль обязателен для заполнения.")]
+    [DataType(DataType.Password)]
+    public required string Password { get; set; }
+
+    public bool RememberMe { get; set; }
+}
+UserResponseDTO.cs
+csharp
+Copy
+public class UserResponseDTO
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public string? Patronymic { get; set; }
+    public string Email { get; set; }
+    public string PhoneNumber { get; set; }
+    public string FullName => $"{Surname} {Name} {Patronymic}".Trim();
+}
+3. AuthController
+csharp
+Copy
+[ApiController]
+[Route("api/[controller]")]
+public class AuthController : ControllerBase
+{
+    private readonly UserManager<User> _userManager;
+    private readonly SignInManager<User> _signInManager;
+    private readonly IMapper _mapper;
+
+    public AuthController(
+        UserManager<User> userManager,
+        SignInManager<User> signInManager,
+        IMapper mapper)
+    {
+        _userManager = userManager;
+        _signInManager = signInManager;
+        _mapper = mapper;
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterDTO registerDto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var user = _mapper.Map<User>(registerDto);
+        user.UserName = registerDto.Email;
+
+        var result = await _userManager.CreateAsync(user, registerDto.Password);
+
+        if (!result.Succeeded)
+            return BadRequest(result.Errors);
+
+        await _signInManager.SignInAsync(user, isPersistent: false);
+        
+        var userResponse = _mapper.Map<UserResponseDTO>(user);
+        return Ok(userResponse);
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var result = await _signInManager.PasswordSignInAsync(
+            loginDto.Email,
+            loginDto.Password,
+            loginDto.RememberMe,
+            lockoutOnFailure: false);
+
+        if (!result.Succeeded)
+            return Unauthorized("Неверные учетные данные");
+
+        var user = await _userManager.FindByEmailAsync(loginDto.Email);
+        var userResponse = _mapper.Map<UserResponseDTO>(user);
+        
+        return Ok(userResponse);
+    }
+
+    [HttpPost("logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await _signInManager.SignOutAsync();
+        return Ok(new { Message = "Выход выполнен успешно" });
+    }
+}
+4. Настройка Program.cs
+csharp
+Copy
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
+    {
+        options.Password.RequireDigit = true;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireUppercase = true;
+        options.Password.RequiredLength = 6;
+        options.User.RequireUniqueEmail = true;
+    })
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+builder.Services.AddControllers();
+
+var app = builder.Build();
+
+app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+
+app.Run();
+5. AutoMapper Profile
+csharp
+Copy
+public class AutoMapperProfile : Profile
+{
+    public AutoMapperProfile()
+    {
+        CreateMap<RegisterDTO, User>();
+        CreateMap<User, UserResponseDTO>();
+    }
+}
