@@ -24,9 +24,9 @@ namespace MyLib.Models
         public void LoadInForUsers()
         {
 
-            users_.Add(new User { login = "Ad123", password = "1234", username = "Иванов Иван Иванович", dateBirth = new DateTime(2002, 08, 15), email = "ivanovI@gmail.com", avatarPath = "D:\\П-30\\Image\\Тигр.jpg" });
-            users_.Add(new User { login = "Dfg11", password = "5678", username = "Петросян Дмитрий Петрович", dateBirth = new DateTime(1999, 05, 10), email = "petro123@gmail.com", avatarPath = "D:\\П-30\\Image\\Бабочка.jpg" });
-            users_.Add(new User { login = "Gal531", password = "9102", username = "Галузин Пётр Алексеевич", dateBirth = new DateTime(2005, 01, 04), email = "galuz34@yandex.ru", avatarPath = "D:\\П-30\\Image\\Кот.jpg" });
+            users_.Add(new User { login = "Ad123", password = "1234", username = "Иванов Иван Иванович", dateBirth = new DateTime(2002, 08, 15), email = "ivanovI@gmail.com", avatarPath = "C:\\Image\\1.jpg" });
+            users_.Add(new User { login = "Dfg11", password = "5678", username = "Петросян Дмитрий Петрович", dateBirth = new DateTime(1999, 05, 10), email = "petro123@gmail.com", avatarPath = "C:\\Image\\1.jpg" });
+            users_.Add(new User { login = "Gal531", password = "9102", username = "Галузин Пётр Алексеевич", dateBirth = new DateTime(2005, 01, 04), email = "galuz34@yandex.ru", avatarPath = "C:\\Image\\1.jpg" });
             filteredUsers = new List<User>(users_);
             DataChanged.Invoke();
         }
